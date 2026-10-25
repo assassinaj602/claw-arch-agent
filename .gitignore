@@ -1,0 +1,41 @@
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.coverage
+htmlcov/
+dist/
+build/
+*.egg-info/
+*.spec
+
+# Environments
+.venv/
+venv/
+ENV/
+env/
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.~*
+
+# Local notes and evaluation transcripts
+email.md
+gemini.md
+plan.md
+.antigravity/
+Task1-EN.docx
+apiii*
+*.key
+
+# Runtime outputs
+workspace_output/
+output/
+*.db
+*.log
+
