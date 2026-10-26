@@ -1,0 +1,7 @@
+CREATE TABLE questions (
+  id SERIAL PRIMARY KEY,
+  prompt TEXT NOT NULL,
+  options JSONB NOT NULL,
+  correct_option INTEGER NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
