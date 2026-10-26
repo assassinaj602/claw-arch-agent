@@ -100,6 +100,10 @@ class TestToolRegistry(unittest.TestCase):
         self.tools.write_file("README.md", "# Space Fractions\n")
 
         test_code = (
+            "import sys\n"
+            "from pathlib import Path\n"
+            "root = Path(__file__).resolve().parent.parent\n"
+            "if str(root) not in sys.path: sys.path.insert(0, str(root))\n"
             "import unittest\n"
             "from main import run\n\n"
             "class TestGame(unittest.TestCase):\n"
@@ -113,7 +117,10 @@ class TestToolRegistry(unittest.TestCase):
         verif2 = self.tools.run_verification()
         self.assertIn("[PASS] All required architectural deliverables present", verif2)
         self.assertIn("[PASS] AST syntax compiled cleanly", verif2)
-        self.assertIn("[PASS] In-process unit test suite passed", verif2)
+        self.assertTrue(
+            "[PASS] In-process unit test suite passed" in verif2
+            or "[PASS] Pytest suite executed and passed successfully" in verif2
+        )
 
 
 class TestContextCompressor(unittest.TestCase):
