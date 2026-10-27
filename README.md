@@ -6,6 +6,30 @@ The system is modeled after the agentic loops analyzed in `Windy3f3f3f3f/how-cla
 
 ---
 
+## ⚡ Quick Start
+
+### 1. Launch the Desktop Code Agent GUI (Recommended)
+```bash
+python main.py
+```
+*Opens the standalone desktop interface to configure your API key, view the 13 extracted PlantUML diagrams, and run autonomous synthesis.*
+
+### 2. Run Headless CLI (for Remote / SSH Servers)
+```bash
+python main.py --cli --api-key YOUR_DEEPSEEK_API_KEY
+```
+
+### 3. Launch the Synthesized "Space Fractions" Desktop Game
+```bash
+python run_game.py
+```
+*Launches the native Tkinter desktop game window (Canvas fraction visuals, state machine, streak bonuses, and SQLite high scores).*
+
+### 4. Standalone Windows Executable (Zero Python Setup)
+Download `ClawArchAgent.exe` directly from [GitHub Actions Artifacts](https://github.com/assassinaj602/claw-arch-agent/actions).
+
+---
+
 ## 1. System Architecture & Mapping to Reference Implementations
 
 ```
@@ -24,7 +48,7 @@ The system is modeled after the agentic loops analyzed in `Windy3f3f3f3f/how-cla
                                                    v (architecture_ir.json)
 +-------------------------------+ +---------------------------------+ +-------------------------------+
 | Tkinter Desktop GUI /         | | query_engine.py                 | | client.py                     |
-| Fallback Web Console          | | - ReAct Dispatch Loop           | | - HTTPX Connection Pool       |
+| Headless CLI Interface        | | - ReAct Dispatch Loop           | | - HTTPX Connection Pool       |
 | - API Key & Model Select      | | - Parallel Tool Calls Batcher   | | - deepseek-v4-pro Auto-Route  |
 | - Real-time Telemetry Queue   | | - ContextCompressor (L1-L3)     | | - Backoff & Alias Fallback    |
 | - Standalone Process Launcher | | - Autonomous Verifier Gate      | |                               |
@@ -98,36 +122,31 @@ python -m pip install -r requirements.txt
 python -m unittest discover tests -v
 ```
 
-All 17 automated tests cover preprocessor parsing, token ledger accounting, pre-edit read guard, context compression invariants, and in-process verification.
+All 23 automated tests cover preprocessor parsing, token ledger accounting, pre-edit read guard, context compression invariants, in-process verification, and game component state machines.
 
 ---
 
 ## 4. Running the Desktop Application
 
-### Option A: Launching via Python
+### Option A: Launching Desktop GUI via Python
 ```bash
-export DEEPSEEK_API_KEY="your-api-key"
-python -m src.main_gui
+python main.py
+```
+*(Optionally set `export DEEPSEEK_API_KEY="your-api-key"` beforehand to pre-populate the key field).*
+
+### Option B: Running Headless CLI (for SSH / Remote Environments)
+```bash
+python main.py --cli --api-key $DEEPSEEK_API_KEY
 ```
 
-### Option B: Building and Running Standalone Windows Executable
-To compile `ClawArchAgent.exe` locally:
+### Option C: Building and Running Standalone Windows Executable
+To compile `ClawArchAgent.exe` locally on Windows:
 ```bash
 python build_exe.py
 # Executable is generated in dist/ClawArchAgent.exe
 ```
 
-Alternatively, push to `main` to trigger the automated GitHub Actions CI workflow (`.github/workflows/build-windows-exe.yml`), which builds and validates `ClawArchAgent.exe` on `windows-latest` and attaches it to workflow artifacts.
-
-### Option C: Headless CLI & Fallback Web Dashboard
-For headless environments:
-```bash
-# Direct CLI execution
-python -m src.cli_web_fallback --doc inputs/Architecture_Documentation.md --view inputs/Architecture_View.md --out workspace_output --api-key $DEEPSEEK_API_KEY
-
-# Web dashboard fallback
-python -m src.cli_web_fallback --web --port 8080
-```
+Alternatively, pre-compiled binaries are generated on every commit via GitHub Actions (`.github/workflows/build-windows-exe.yml`) on `windows-latest` and downloadable under GitHub Actions workflow artifacts.
 
 ---
 

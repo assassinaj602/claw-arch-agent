@@ -48,7 +48,7 @@ def build() -> None:
         "openai",
         "--hidden-import",
         "runpy",
-        str(root / "src" / "main_gui.py"),
+        str(root / "main.py"),
     ]
 
     print(f"[INFO] Executing PyInstaller build on {sys.platform}...")
