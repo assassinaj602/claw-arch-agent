@@ -466,13 +466,14 @@ class SpaceFractionsApp:
 
             for slice_i in range(den):
                 fill_color = "#50FA7B" if slice_i < num else "#44475A"
-                canvas.create_pieslice(
+                canvas.create_arc(
                     cx - r, cy - r, cx + r, cy + r,
                     start=start_angle,
                     extent=angle_step,
                     fill=fill_color,
                     outline="#0B0E14",
                     width=2,
+                    style=tk.PIESLICE,
                 )
                 start_angle += angle_step
 
