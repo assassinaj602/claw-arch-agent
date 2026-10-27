@@ -33,6 +33,11 @@ import tkinter as tk
 from tkinter import filedialog, messagebox, ttk
 from tkinter.scrolledtext import ScrolledText
 
+# Ensure root directory is on sys.path for direct execution
+_project_root = Path(__file__).resolve().parent.parent
+if str(_project_root) not in sys.path:
+    sys.path.insert(0, str(_project_root))
+
 from src.agent.client import DeepSeekClient
 from src.agent.preprocessor import ArchitecturePreprocessor
 from src.agent.query_engine import QueryEngine
