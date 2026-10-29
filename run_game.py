@@ -13,10 +13,13 @@ import runpy
 import sys
 
 ROOT_DIR = Path(__file__).resolve().parent
+BASE_DIR = Path(getattr(sys, "_MEIPASS", ROOT_DIR))
 
 candidates = [
     ROOT_DIR / "workspace_output" / "main.py",
+    BASE_DIR / "workspace_output" / "main.py",
     ROOT_DIR / "examples" / "space_fractions_desktop" / "main.py",
+    BASE_DIR / "examples" / "space_fractions_desktop" / "main.py",
 ]
 
 target = None

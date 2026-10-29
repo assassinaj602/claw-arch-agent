@@ -43,13 +43,17 @@ jobs:
             echo "[ERR] ClawArchAgent.exe not found in dist/"
             exit 1
           fi
-          echo "[PASS] Binary verified: dist/ClawArchAgent.exe"
-          ls -lh dist/ClawArchAgent.exe
+          if [ ! -f "dist/SpaceFractions.exe" ]; then
+            echo "[ERR] SpaceFractions.exe not found in dist/"
+            exit 1
+          fi
+          echo "[PASS] Binaries verified in dist/:"
+          ls -lh dist/*.exe
 
-      - name: Upload Windows Executable Artifact
+      - name: Upload Windows Executables Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ClawArchAgent-Windows-x64
-          path: dist/ClawArchAgent.exe
+          name: Windows-Desktop-Executables
+          path: dist/*.exe
           if-no-files-found: error
 

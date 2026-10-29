@@ -25,8 +25,16 @@ python run_game.py
 ```
 *Launches the native Tkinter desktop game window (Canvas fraction visuals, state machine, streak bonuses, and SQLite high scores).*
 
-### 4. Standalone Windows Executable (Zero Python Setup)
-Download `ClawArchAgent.exe` directly from [GitHub Actions Artifacts](https://github.com/assassinaj602/claw-arch-agent/actions).
+### 4. Standalone Windows Executables (Zero Python Setup)
+Pre-compiled standalone Windows executables with zero Python installation required:
+* **`dist/ClawArchAgent.exe`**: Double-click to launch the Code Agent Desktop Application. Configure API key, input files, output directory, and execute code synthesis with live token & USD cost telemetry.
+* **`dist/SpaceFractions.exe`**: Double-click to launch the Space Fractions Desktop Game directly with full Canvas visuals, sound effects, SQLite high score persistence, and admin question editor.
+
+To compile both executables locally on Windows:
+```bash
+python build_exe.py
+# Or double-click build_exe.bat
+```
 
 ---
 

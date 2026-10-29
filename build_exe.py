@@ -61,6 +61,67 @@ def build() -> None:
     print("[PASS] Standalone executable build succeeded in dist/")
 
 
+def build_game() -> None:
+    sep = ";" if sys.platform.startswith("win") else ":"
+    root = Path(__file__).resolve().parent
+
+    examples_dir = root / "examples"
+    workspace_dir = root / "workspace_output"
+
+    cmd = [
+        sys.executable,
+        "-m",
+        "PyInstaller",
+        "--noconfirm",
+        "--onefile",
+        "--windowed",
+        "--name",
+        "SpaceFractions",
+        "--add-data",
+        f"{examples_dir}{sep}examples",
+        "--add-data",
+        f"{workspace_dir}{sep}workspace_output",
+        "--hidden-import",
+        "tkinter",
+        "--hidden-import",
+        "tkinter.ttk",
+        "--hidden-import",
+        "tkinter.messagebox",
+        "--hidden-import",
+        "sqlite3",
+        "--hidden-import",
+        "random",
+        "--hidden-import",
+        "math",
+        "--hidden-import",
+        "json",
+        "--hidden-import",
+        "runpy",
+        str(root / "run_game.py"),
+    ]
+
+    print(f"\n[INFO] Executing PyInstaller build for SpaceFractions desktop game on {sys.platform}...")
+    print(" ".join(cmd))
+    res = subprocess.run(cmd, cwd=str(root))
+    if res.returncode != 0:
+        print(f"[ERR] PyInstaller game build failed with exit code {res.returncode}", file=sys.stderr)
+        sys.exit(res.returncode)
+
+    print("[PASS] Standalone SpaceFractions.exe build succeeded in dist/")
+
+
 if __name__ == "__main__":
-    build()
+    import argparse
+    parser = argparse.ArgumentParser(description="Build desktop executables")
+    parser.add_argument("--agent-only", action="store_true", help="Build only ClawArchAgent.exe")
+    parser.add_argument("--game-only", action="store_true", help="Build only SpaceFractions.exe")
+    args = parser.parse_args()
+
+    if args.game_only:
+        build_game()
+    elif args.agent_only:
+        build()
+    else:
+        build()
+        build_game()
 
