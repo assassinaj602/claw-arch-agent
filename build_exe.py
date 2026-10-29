@@ -68,6 +68,10 @@ def build_game() -> None:
     examples_dir = root / "examples"
     workspace_dir = root / "workspace_output"
 
+    add_data_args = ["--add-data", f"{examples_dir}{sep}examples"]
+    if workspace_dir.exists():
+        add_data_args.extend(["--add-data", f"{workspace_dir}{sep}workspace_output"])
+
     cmd = [
         sys.executable,
         "-m",
@@ -77,10 +81,7 @@ def build_game() -> None:
         "--windowed",
         "--name",
         "SpaceFractions",
-        "--add-data",
-        f"{examples_dir}{sep}examples",
-        "--add-data",
-        f"{workspace_dir}{sep}workspace_output",
+        *add_data_args,
         "--hidden-import",
         "tkinter",
         "--hidden-import",
