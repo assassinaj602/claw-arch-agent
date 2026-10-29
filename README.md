@@ -4,6 +4,9 @@ ClawArchAgent is a lightweight, autonomous code synthesis agent designed to tran
 
 The system is modeled after the agentic loops analyzed in `Windy3f3f3f3f/how-claude-code-works` and implemented in `ultraworkers/claw-code`, using DeepSeek (`deepseek-v4-pro` / `deepseek-chat`) via official API endpoints, with native support for TokenHarbor (`https://tokenharbor.ai/v1`) and OpenRouter gateway endpoints.
 
+> 🎬 **Demo Video (Windows Desktop Walkthrough):** [Watch on YouTube](https://youtu.be/q9SR2Glph1g)  
+> 📦 **Pre-built Windows Executables (.exe):** [Download v1.1.0 Release](https://github.com/assassinaj602/claw-arch-agent/releases/tag/v1.1.0)
+
 ---
 
 ## ⚡ Quick Start
